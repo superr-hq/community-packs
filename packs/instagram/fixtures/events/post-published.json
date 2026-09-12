@@ -1,0 +1,15 @@
+{
+  "name": "post-published-default-subscription",
+  "delivery": { "rawBody": "{\"id\":\"evt_p1\",\"event\":\"post.published\",\"post\":{\"id\":\"post_77\",\"status\":\"published\"},\"timestamp\":\"2026-08-26T10:00:00.000Z\"}" },
+  "config": { "path": "ig" },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "post.published",
+        "id": "evt_p1",
+        "raw": {"id":"evt_p1","event":"post.published","post":{"id":"post_77","status":"published"},"timestamp":"2026-08-26T10:00:00.000Z"}
+      }
+    }
+  }
+}

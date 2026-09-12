@@ -1,0 +1,6 @@
+{
+  "name": "sibling-platform-traffic-is-gated",
+  "delivery": { "rawBody": "{\"id\":\"evt_i1\",\"event\":\"comment.received\",\"comment\":{\"id\":\"c_i1\",\"platform\":\"instagram\",\"text\":\"hello\"},\"account\":{\"id\":\"acc_ig_1\",\"platform\":\"instagram\",\"username\":\"brandco\"}}" },
+  "config": { "path": "th" },
+  "expect": { "status": "skipped", "skipCode": "FOREIGN_PLATFORM" }
+}

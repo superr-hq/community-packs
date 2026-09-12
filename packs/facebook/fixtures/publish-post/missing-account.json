@@ -1,0 +1,7 @@
+{
+  "name": "missing-account-id-fails-before-transport",
+  "input": { "caption": "No page bound" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 200, json: {} }) })" },
+  "expect": { "status": "failed", "error": "MISSING_ACCOUNT_ID" }
+}

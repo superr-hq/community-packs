@@ -1,0 +1,9 @@
+{
+  "name": "string-equality-matches",
+  "input": { "value": "comment.received" },
+  "config": { "operator": "eq", "compareTo": "comment.received" },
+  "expect": {
+    "status": "ok",
+    "ports": { "branch": "true", "matched": true }
+  }
+}

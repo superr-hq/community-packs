@@ -1,0 +1,7 @@
+{
+  "name": "media-urls-not-an-array",
+  "input": { "accountId": "acc_ig_1", "mediaUrls": "photo.png" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 200, json: {} }) })" },
+  "expect": { "status": "failed", "error": "INVALID_POST_REQUEST" }
+}

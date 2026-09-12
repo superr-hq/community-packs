@@ -1,0 +1,7 @@
+{
+  "name": "negative-duration-rejected",
+  "input": {},
+  "config": { "mode": "duration", "durationMs": -5 },
+  "now": 1000,
+  "expect": { "status": "failed", "error": "INVALID_DELAY_CONFIG" }
+}

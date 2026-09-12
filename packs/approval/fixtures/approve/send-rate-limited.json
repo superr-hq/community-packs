@@ -1,0 +1,12 @@
+{
+  "name": "send-rate-limited",
+  "input": { "summary": "Deploy release v2" },
+  "config": { "channel": "messaging", "recipient": "ops-lead" },
+  "vmGlobals": {
+    "__superrMessagingClient": "({ send: async () => { const err = new Error('rate limited'); err.status = 429; throw err; } })"
+  },
+  "expect": {
+    "status": "failed",
+    "error": "APPROVAL_SEND_RATE_LIMITED"
+  }
+}

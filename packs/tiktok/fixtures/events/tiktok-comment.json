@@ -1,0 +1,61 @@
+{
+  "name": "tiktok-comment",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_c1\",\"event\":\"comment.received\",\"comment\":{\"id\":\"c_1\",\"postId\":null,\"platformPostId\":\"tt_video_7\",\"platform\":\"tiktok\",\"text\":\"This is fire 🔥\",\"author\":{\"id\":\"a_1\",\"username\":\"fanuser\",\"name\":\"Fan User\"},\"createdAt\":\"2026-08-28T08:00:00.000Z\",\"isReply\":false,\"parentCommentId\":null},\"post\":{\"id\":null,\"platformPostId\":\"tt_video_7\"},\"account\":{\"id\":\"acc_tt_1\",\"accountId\":\"acc_tt_1\",\"platform\":\"tiktok\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-28T08:00:01.000Z\"}"
+  },
+  "config": {
+    "path": "tt",
+    "eventTypes": [
+      "comment.received"
+    ]
+  },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "comment.received",
+        "id": "evt_c1",
+        "accountId": "acc_tt_1",
+        "username": "brandco",
+        "text": "This is fire 🔥",
+        "platformPostId": "tt_video_7",
+        "isReply": false,
+        "author": {
+          "id": "a_1",
+          "username": "fanuser",
+          "name": "Fan User"
+        },
+        "raw": {
+          "id": "evt_c1",
+          "event": "comment.received",
+          "comment": {
+            "id": "c_1",
+            "postId": null,
+            "platformPostId": "tt_video_7",
+            "platform": "tiktok",
+            "text": "This is fire 🔥",
+            "author": {
+              "id": "a_1",
+              "username": "fanuser",
+              "name": "Fan User"
+            },
+            "createdAt": "2026-08-28T08:00:00.000Z",
+            "isReply": false,
+            "parentCommentId": null
+          },
+          "post": {
+            "id": null,
+            "platformPostId": "tt_video_7"
+          },
+          "account": {
+            "id": "acc_tt_1",
+            "accountId": "acc_tt_1",
+            "platform": "tiktok",
+            "username": "brandco"
+          },
+          "timestamp": "2026-08-28T08:00:01.000Z"
+        }
+      }
+    }
+  }
+}

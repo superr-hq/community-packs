@@ -1,0 +1,6 @@
+{
+  "name": "missing-event-kind-fails",
+  "delivery": { "rawBody": "{\"id\":\"evt_x9\",\"account\":{\"id\":\"acc_tt_1\",\"platform\":\"tiktok\"},\"timestamp\":\"2026-08-28T10:00:00.000Z\"}" },
+  "config": { "path": "tt" },
+  "expect": { "status": "failed", "error": "MALFORMED_EVENT" }
+}

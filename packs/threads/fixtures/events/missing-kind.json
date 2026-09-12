@@ -1,0 +1,6 @@
+{
+  "name": "missing-event-kind-fails",
+  "delivery": { "rawBody": "{\"id\":\"evt_x9\",\"account\":{\"id\":\"acc_th_1\",\"platform\":\"threads\"},\"timestamp\":\"2026-08-29T10:00:00.000Z\"}" },
+  "config": { "path": "th" },
+  "expect": { "status": "failed", "error": "MALFORMED_EVENT" }
+}

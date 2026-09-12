@@ -1,0 +1,9 @@
+{
+  "name": "null-is-a-value",
+  "delivery": { "payload": null },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": { "payload": null }
+  }
+}

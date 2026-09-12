@@ -1,0 +1,61 @@
+{
+  "name": "threads-comment",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_c1\",\"event\":\"comment.received\",\"comment\":{\"id\":\"c_1\",\"postId\":null,\"platformPostId\":\"th_post_5\",\"platform\":\"threads\",\"text\":\"Great point\",\"author\":{\"id\":\"a_1\",\"username\":\"fanuser\",\"name\":\"Fan User\"},\"createdAt\":\"2026-08-29T08:00:00.000Z\",\"isReply\":false,\"parentCommentId\":null},\"post\":{\"id\":null,\"platformPostId\":\"th_post_5\"},\"account\":{\"id\":\"acc_th_1\",\"accountId\":\"acc_th_1\",\"platform\":\"threads\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-29T08:00:01.000Z\"}"
+  },
+  "config": {
+    "path": "th",
+    "eventTypes": [
+      "comment.received"
+    ]
+  },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "comment.received",
+        "id": "evt_c1",
+        "accountId": "acc_th_1",
+        "username": "brandco",
+        "text": "Great point",
+        "platformPostId": "th_post_5",
+        "isReply": false,
+        "author": {
+          "id": "a_1",
+          "username": "fanuser",
+          "name": "Fan User"
+        },
+        "raw": {
+          "id": "evt_c1",
+          "event": "comment.received",
+          "comment": {
+            "id": "c_1",
+            "postId": null,
+            "platformPostId": "th_post_5",
+            "platform": "threads",
+            "text": "Great point",
+            "author": {
+              "id": "a_1",
+              "username": "fanuser",
+              "name": "Fan User"
+            },
+            "createdAt": "2026-08-29T08:00:00.000Z",
+            "isReply": false,
+            "parentCommentId": null
+          },
+          "post": {
+            "id": null,
+            "platformPostId": "th_post_5"
+          },
+          "account": {
+            "id": "acc_th_1",
+            "accountId": "acc_th_1",
+            "platform": "threads",
+            "username": "brandco"
+          },
+          "timestamp": "2026-08-29T08:00:01.000Z"
+        }
+      }
+    }
+  }
+}

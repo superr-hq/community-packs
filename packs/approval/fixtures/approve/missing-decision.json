@@ -1,0 +1,7 @@
+{
+  "name": "resume-without-decision",
+  "input": { "summary": "Publish campaign" },
+  "delivery": {},
+  "config": {},
+  "expect": { "status": "failed", "error": "INVALID_DECISION" }
+}

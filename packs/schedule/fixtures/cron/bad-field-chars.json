@@ -1,0 +1,6 @@
+{
+  "name": "illegal-characters-rejected",
+  "delivery": { "scheduledAt": "2026-08-26T09:15:00.000Z" },
+  "config": { "cron": "* * * * ;" },
+  "expect": { "status": "failed", "error": "INVALID_CRON" }
+}

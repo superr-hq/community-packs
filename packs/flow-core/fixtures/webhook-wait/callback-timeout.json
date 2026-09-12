@@ -1,0 +1,15 @@
+{
+  "name": "callback-timeout-expired",
+  "input": {},
+  "delivery": {
+    "expired": true,
+    "expiredAt": "2026-09-01T12:00:00.000Z"
+  },
+  "config": {
+    "timeoutMs": 86400000
+  },
+  "expect": {
+    "status": "failed",
+    "error": "WEBHOOK_WAIT_TIMEOUT"
+  }
+}

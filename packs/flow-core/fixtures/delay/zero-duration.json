@@ -1,0 +1,10 @@
+{
+  "name": "zero-duration-resumes-immediately",
+  "input": {},
+  "config": { "mode": "duration", "durationMs": 0 },
+  "now": 1721900000000,
+  "expect": {
+    "status": "ok",
+    "ports": { "resumeAt": "2024-07-25T09:33:20.000Z" }
+  }
+}

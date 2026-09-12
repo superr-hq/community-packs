@@ -1,0 +1,6 @@
+{
+  "name": "no-raw-body-at-all",
+  "delivery": {},
+  "config": { "path": "generic" },
+  "expect": { "status": "failed", "error": "MALFORMED_JSON" }
+}

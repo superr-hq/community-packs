@@ -1,0 +1,34 @@
+{
+  "name": "lead-ad-submission",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_l1\",\"event\":\"lead.received\",\"lead\":{\"id\":\"lead_1\",\"formId\":\"form_9\",\"answers\":{\"email\":\"jane@example.com\"}},\"account\":{\"id\":\"acc_fb_1\",\"accountId\":\"acc_fb_1\",\"platform\":\"facebook\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-27T10:00:00.000Z\"}"
+  },
+  "config": { "path": "fb" },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "lead.received",
+        "id": "evt_l1",
+        "accountId": "acc_fb_1",
+        "username": "brandco",
+        "raw": {
+          "id": "evt_l1",
+          "event": "lead.received",
+          "lead": {
+            "id": "lead_1",
+            "formId": "form_9",
+            "answers": { "email": "jane@example.com" }
+          },
+          "account": {
+            "id": "acc_fb_1",
+            "accountId": "acc_fb_1",
+            "platform": "facebook",
+            "username": "brandco"
+          },
+          "timestamp": "2026-08-27T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

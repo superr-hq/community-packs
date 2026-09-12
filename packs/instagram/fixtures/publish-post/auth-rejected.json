@@ -1,0 +1,7 @@
+{
+  "name": "rejected-credentials",
+  "input": { "accountId": "acc_ig_1", "caption": "Hello" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 401, json: {} }) })" },
+  "expect": { "status": "failed", "error": "AUTH_REJECTED" }
+}

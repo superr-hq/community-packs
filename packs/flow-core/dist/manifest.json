@@ -1,0 +1,345 @@
+{
+  "$schema": "https://superr.dev/schemas/pack.v2.json",
+  "id": "flow-core",
+  "version": "2.0.0",
+  "name": "Flow Core",
+  "description": "Core workflow control nodes: state writes, delays, and conditional branching.",
+  "engine": {
+    "kernel": "^2.0.0"
+  },
+  "nodes": [
+    {
+      "key": "set-state",
+      "title": "Set State",
+      "category": "flow",
+      "kind": "step",
+      "icon": "database",
+      "accent": "#6366f1",
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "title": "Value to store"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "stateKey": {
+            "type": "string"
+          },
+          "storedValue": {
+            "title": "The stored value, echoed for downstream references"
+          }
+        },
+        "required": [
+          "stateKey",
+          "storedValue"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$",
+            "title": "State key"
+          }
+        },
+        "required": [
+          "key"
+        ]
+      },
+      "policies": {
+        "timeoutMs": 5000
+      },
+      "errors": [
+        {
+          "code": "EMPTY_STATE_KEY",
+          "severity": "warn",
+          "retryable": false,
+          "remediation": "Set the node's `key` config to a non-empty state key.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ],
+      "ui": {
+        "groups": [
+          {
+            "label": "State",
+            "fields": [
+              "key"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Writes a value to a path in workflow state."
+    },
+    {
+      "key": "delay",
+      "title": "Delay",
+      "category": "flow",
+      "kind": "delay",
+      "icon": "timer",
+      "accent": "#0ea5e9",
+      "inputs": {
+        "type": "object",
+        "properties": {}
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "resumeAt": {
+            "type": "string",
+            "title": "ISO instant the workflow resumes"
+          }
+        },
+        "required": [
+          "resumeAt"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "duration",
+              "until"
+            ],
+            "title": "Delay mode"
+          },
+          "durationMs": {
+            "type": "number",
+            "title": "Milliseconds to wait (mode=duration)"
+          },
+          "until": {
+            "type": "string",
+            "title": "ISO instant to resume at (mode=until)"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "errors": [
+        {
+          "code": "INVALID_DELAY_CONFIG",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "Pick mode=duration with durationMs ≥ 0, or mode=until with a parseable ISO `until`; fix the node config and republish.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          }
+        }
+      ],
+      "ui": {
+        "groups": [
+          {
+            "label": "Resume",
+            "fields": [
+              "mode",
+              "durationMs",
+              "until"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Waits for a configured duration or until a timestamp."
+    },
+    {
+      "key": "condition",
+      "title": "Condition Gate",
+      "category": "flow",
+      "kind": "gate",
+      "icon": "branch",
+      "accent": "#6366f1",
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "title": "Left-hand operand under test"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "branch": {
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "title": "Branch taken"
+          },
+          "matched": {
+            "type": "boolean",
+            "title": "Whether the condition held"
+          }
+        },
+        "required": [
+          "branch",
+          "matched"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "type": "string",
+            "enum": [
+              "eq",
+              "ne",
+              "gt",
+              "gte",
+              "lt",
+              "lte",
+              "contains",
+              "truthy",
+              "falsy"
+            ],
+            "title": "Comparison"
+          },
+          "compareTo": {
+            "title": "Right-hand operand (ignored by truthy/falsy)"
+          }
+        },
+        "required": [
+          "operator"
+        ]
+      },
+      "errors": [],
+      "ui": {
+        "groups": [
+          {
+            "label": "Condition",
+            "fields": [
+              "operator",
+              "compareTo"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Evaluates an expression and routes control edges via true/false ports."
+    },
+    {
+      "key": "webhook-wait",
+      "title": "Wait for Webhook",
+      "category": "flow",
+      "kind": "hook",
+      "icon": "webhook",
+      "accent": "#f59e0b",
+      "inputs": {
+        "type": "object",
+        "properties": {}
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "title": "Parsed request body"
+          },
+          "headers": {
+            "type": "object",
+            "title": "HTTP headers"
+          },
+          "query": {
+            "type": "object",
+            "title": "Query parameters"
+          },
+          "method": {
+            "type": "string",
+            "title": "HTTP method"
+          }
+        },
+        "required": [
+          "body",
+          "headers",
+          "query",
+          "method"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "timeoutMs": {
+            "type": "number",
+            "minimum": 0,
+            "title": "Timeout in milliseconds (default 24h)"
+          },
+          "respondMode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "title": "Response mode"
+          }
+        }
+      },
+      "policies": {
+        "timeoutMs": 86400000
+      },
+      "errors": [
+        {
+          "code": "WEBHOOK_WAIT_TIMEOUT",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "The webhook wait hook exceeded its configured timeoutMs before an HTTP callback was received.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              },
+              "expiredAt": {
+                "type": "string"
+              },
+              "timeoutMs": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      ],
+      "ui": {
+        "groups": [
+          {
+            "label": "Wait",
+            "fields": [
+              "timeoutMs",
+              "respondMode"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Pause workflow execution until an incoming HTTP webhook is received."
+    }
+  ]
+}

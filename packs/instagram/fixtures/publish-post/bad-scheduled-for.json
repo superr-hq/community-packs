@@ -1,0 +1,7 @@
+{
+  "name": "unparseable-schedule-instant",
+  "input": { "accountId": "acc_ig_1", "caption": "Hello" },
+  "config": { "scheduledFor": "soon-ish" },
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 200, json: {} }) })" },
+  "expect": { "status": "failed", "error": "INVALID_POST_REQUEST" }
+}

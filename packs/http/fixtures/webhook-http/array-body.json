@@ -1,0 +1,9 @@
+{
+  "name": "array-payload-passes-verbatim",
+  "delivery": { "rawBody": "[1,2,3]" },
+  "config": { "path": "generic" },
+  "expect": {
+    "status": "ok",
+    "ports": { "body": [1, 2, 3] }
+  }
+}

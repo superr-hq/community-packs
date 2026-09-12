@@ -1,0 +1,61 @@
+{
+  "name": "facebook-comment",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_c1\",\"event\":\"comment.received\",\"comment\":{\"id\":\"c_1\",\"postId\":null,\"platformPostId\":\"fb_post_9\",\"platform\":\"facebook\",\"text\":\"Interested in this!\",\"author\":{\"id\":\"a_1\",\"username\":\"jane.doe\",\"name\":\"Jane Doe\"},\"createdAt\":\"2026-08-27T08:00:00.000Z\",\"isReply\":false,\"parentCommentId\":null},\"post\":{\"id\":null,\"platformPostId\":\"fb_post_9\"},\"account\":{\"id\":\"acc_fb_1\",\"accountId\":\"acc_fb_1\",\"platform\":\"facebook\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-27T08:00:01.000Z\"}"
+  },
+  "config": {
+    "path": "fb",
+    "eventTypes": [
+      "comment.received"
+    ]
+  },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "comment.received",
+        "id": "evt_c1",
+        "accountId": "acc_fb_1",
+        "username": "brandco",
+        "text": "Interested in this!",
+        "platformPostId": "fb_post_9",
+        "isReply": false,
+        "author": {
+          "id": "a_1",
+          "username": "jane.doe",
+          "name": "Jane Doe"
+        },
+        "raw": {
+          "id": "evt_c1",
+          "event": "comment.received",
+          "comment": {
+            "id": "c_1",
+            "postId": null,
+            "platformPostId": "fb_post_9",
+            "platform": "facebook",
+            "text": "Interested in this!",
+            "author": {
+              "id": "a_1",
+              "username": "jane.doe",
+              "name": "Jane Doe"
+            },
+            "createdAt": "2026-08-27T08:00:00.000Z",
+            "isReply": false,
+            "parentCommentId": null
+          },
+          "post": {
+            "id": null,
+            "platformPostId": "fb_post_9"
+          },
+          "account": {
+            "id": "acc_fb_1",
+            "accountId": "acc_fb_1",
+            "platform": "facebook",
+            "username": "brandco"
+          },
+          "timestamp": "2026-08-27T08:00:01.000Z"
+        }
+      }
+    }
+  }
+}

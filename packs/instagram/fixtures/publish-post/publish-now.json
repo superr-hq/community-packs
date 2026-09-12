@@ -1,0 +1,10 @@
+{
+  "name": "publish-immediately",
+  "input": { "accountId": "acc_ig_1", "caption": "Hello world" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 200, json: { _id: 'post_77', status: 'scheduled' } }) })" },
+  "expect": {
+    "status": "ok",
+    "ports": { "postId": "post_77", "postStatus": "scheduled" }
+  }
+}

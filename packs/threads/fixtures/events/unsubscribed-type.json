@@ -1,0 +1,16 @@
+{
+  "name": "unsubscribed-event-type-is-skipped",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_c1\",\"event\":\"comment.received\",\"comment\":{\"id\":\"c_1\",\"platformPostId\":\"th_post_5\",\"platform\":\"threads\",\"text\":\"Great point\"},\"post\":{\"id\":null,\"platformPostId\":\"th_post_5\"},\"account\":{\"id\":\"acc_th_1\",\"accountId\":\"acc_th_1\",\"platform\":\"threads\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-29T08:00:01.000Z\"}"
+  },
+  "config": {
+    "path": "th",
+    "eventTypes": [
+      "post.published"
+    ]
+  },
+  "expect": {
+    "status": "skipped",
+    "skipCode": "UNSUBSCRIBED_EVENT_TYPE"
+  }
+}

@@ -1,0 +1,352 @@
+{
+  "$schema": "https://superr.dev/schemas/pack.v2.json",
+  "id": "threads",
+  "version": "2.0.0",
+  "name": "Threads",
+  "description": "Threads triggers and actions — replies on posts, thread-chain publishing, post lifecycle, and account lifecycle.",
+  "engine": {
+    "kernel": "^2.0.0"
+  },
+  "icon": "threads",
+  "accent": "#71717a",
+  "connections": [
+    {
+      "id": "threads",
+      "capabilities": [
+        "publish.post",
+        "comments.read"
+      ],
+      "allowedPlatforms": [
+        "threads"
+      ]
+    }
+  ],
+  "envRequirements": [
+    {
+      "key": "SOCIAL_API_KEY",
+      "required": true,
+      "secret": true
+    }
+  ],
+  "nodes": [
+    {
+      "key": "events",
+      "title": "Threads Events",
+      "category": "trigger",
+      "kind": "trigger",
+      "icon": "threads",
+      "accent": "#71717a",
+      "output": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "object",
+            "title": "Normalized social event",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "accountId": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "platformPostId": {
+                "type": "string"
+              },
+              "isReply": {
+                "type": "boolean"
+              },
+              "author": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "raw": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "type",
+              "raw"
+            ]
+          }
+        },
+        "required": [
+          "event"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^[a-z0-9-/]+$",
+            "title": "Webhook path"
+          },
+          "eventTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "comment.received",
+                "post.published",
+                "post.failed",
+                "account.connected",
+                "account.disconnected"
+              ]
+            },
+            "title": "Subscribed event types (default: all)"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "trigger": {
+        "ingress": {
+          "protocol": "social.threads",
+          "routeClaim": {
+            "pathFromConfig": "path",
+            "fallbackForbidden": true
+          },
+          "auth": {
+            "kind": "hmac",
+            "header": "x-social-signature",
+            "secretRef": "config.signatureSecret"
+          }
+        }
+      },
+      "policies": {
+        "timeoutMs": 15000
+      },
+      "errors": [
+        {
+          "code": "MALFORMED_EVENT",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "The delivery body is not a well-formed social event; check the sending integration.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          }
+        }
+      ],
+      "ui": {
+        "groups": [
+          {
+            "label": "Route",
+            "fields": [
+              "path"
+            ]
+          },
+          {
+            "label": "Subscription",
+            "fields": [
+              "eventTypes"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Trigger workflow from Threads replies, mentions, or post lifecycle."
+    },
+    {
+      "key": "publish-post",
+      "title": "Publish Post",
+      "category": "action",
+      "kind": "step",
+      "icon": "threads",
+      "accent": "#71717a",
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string",
+            "title": "Threads account to publish as"
+          },
+          "caption": {
+            "type": "string",
+            "title": "Post text"
+          },
+          "mediaUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "Media URLs (images/videos)"
+          }
+        },
+        "required": [
+          "accountId"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "postId": {
+            "type": "string"
+          },
+          "postStatus": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "postId",
+          "postStatus"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "publishNow": {
+            "type": "boolean",
+            "default": true,
+            "title": "Publish immediately"
+          },
+          "scheduledFor": {
+            "type": "string",
+            "title": "ISO instant to schedule for"
+          },
+          "topic_tag": {
+            "type": "string",
+            "title": "Topic tag for the post"
+          },
+          "threadItems": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "title": "Thread chain items (e.g. [{ \"text\": \"…\" }])"
+          }
+        }
+      },
+      "policies": {
+        "timeoutMs": 30000,
+        "retry": {
+          "maxAttempts": 3,
+          "backoffMs": 2000
+        }
+      },
+      "errors": [
+        {
+          "code": "MISSING_ACCOUNT_ID",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "Bind a threads account id to the accountId input.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          }
+        },
+        {
+          "code": "INVALID_POST_REQUEST",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "Provide a caption or at least one media URL; scheduledFor must be a parseable ISO instant; threadItems must be a non-empty array of objects.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          }
+        },
+        {
+          "code": "RATE_LIMITED",
+          "severity": "warn",
+          "retryable": true,
+          "remediation": "The platform throttled this publish; the retry policy backs off automatically.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "httpStatus": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "code": "AUTH_REJECTED",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "Reconnect the threads account; its credentials were rejected."
+        },
+        {
+          "code": "PROVIDER_ERROR",
+          "severity": "error",
+          "retryable": true,
+          "remediation": "The publishing service failed transiently; retries may succeed.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "httpStatus": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "code": "TRANSPORT_UNAVAILABLE",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "No social client was bound to this execution; check the runtime host wiring."
+        }
+      ],
+      "ui": {
+        "groups": [
+          {
+            "label": "Publish",
+            "fields": [
+              "publishNow",
+              "scheduledFor"
+            ]
+          },
+          {
+            "label": "Threads options",
+            "fields": [
+              "topic_tag",
+              "threadItems"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Publish thread-chain posts and updates to Threads."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "rejected-account-credentials-are-fatal",
+  "input": { "accountId": "acc_tt_1", "caption": "Hello" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 401, json: {} }) })" },
+  "expect": { "status": "failed", "error": "AUTH_REJECTED" }
+}

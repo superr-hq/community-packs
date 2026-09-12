@@ -1,0 +1,12 @@
+{
+  "name": "send-recipient-unreachable",
+  "input": { "summary": "Deploy release v2" },
+  "config": { "channel": "messaging", "recipient": "unknown-user" },
+  "vmGlobals": {
+    "__superrMessagingClient": "({ send: async () => { const err = new Error('recipient not found'); err.status = 404; err.code = 'RECIPIENT_UNREACHABLE'; throw err; } })"
+  },
+  "expect": {
+    "status": "failed",
+    "error": "APPROVAL_RECIPIENT_UNREACHABLE"
+  }
+}

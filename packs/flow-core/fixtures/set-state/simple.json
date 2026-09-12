@@ -1,0 +1,9 @@
+{
+  "name": "store-a-string",
+  "input": { "value": "hello" },
+  "config": { "key": "greeting" },
+  "expect": {
+    "status": "ok",
+    "ports": { "stateKey": "greeting", "storedValue": "hello" }
+  }
+}

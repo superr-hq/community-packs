@@ -1,0 +1,34 @@
+{
+  "name": "post-published-lifecycle",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_p1\",\"event\":\"post.published\",\"post\":{\"id\":\"p_2\",\"platformPostId\":\"th_post_6\",\"status\":\"published\"},\"account\":{\"id\":\"acc_th_1\",\"accountId\":\"acc_th_1\",\"platform\":\"threads\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-29T10:00:00.000Z\"}"
+  },
+  "config": { "path": "th" },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "post.published",
+        "id": "evt_p1",
+        "accountId": "acc_th_1",
+        "username": "brandco",
+        "raw": {
+          "id": "evt_p1",
+          "event": "post.published",
+          "post": {
+            "id": "p_2",
+            "platformPostId": "th_post_6",
+            "status": "published"
+          },
+          "account": {
+            "id": "acc_th_1",
+            "accountId": "acc_th_1",
+            "platform": "threads",
+            "username": "brandco"
+          },
+          "timestamp": "2026-08-29T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "null-is-storable",
+  "input": { "value": null },
+  "config": { "key": "lastEventId" },
+  "expect": {
+    "status": "ok",
+    "ports": { "stateKey": "lastEventId", "storedValue": null }
+  }
+}

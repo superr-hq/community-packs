@@ -1,0 +1,36 @@
+{
+  "name": "tiktok-url-resolved",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_u1\",\"event\":\"post.tiktok.url_resolved\",\"post\":{\"id\":\"p_1\",\"platformPostId\":\"tt_video_7\",\"url\":\"https://www.tiktok.com/@brandco/video/7421000000000000001\"},\"account\":{\"id\":\"acc_tt_1\",\"accountId\":\"acc_tt_1\",\"platform\":\"tiktok\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-28T09:30:00.000Z\"}"
+  },
+  "config": {
+    "path": "tt"
+  },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "post.tiktok.url_resolved",
+        "id": "evt_u1",
+        "accountId": "acc_tt_1",
+        "username": "brandco",
+        "raw": {
+          "id": "evt_u1",
+          "event": "post.tiktok.url_resolved",
+          "post": {
+            "id": "p_1",
+            "platformPostId": "tt_video_7",
+            "url": "https://www.tiktok.com/@brandco/video/7421000000000000001"
+          },
+          "account": {
+            "id": "acc_tt_1",
+            "accountId": "acc_tt_1",
+            "platform": "tiktok",
+            "username": "brandco"
+          },
+          "timestamp": "2026-08-28T09:30:00.000Z"
+        }
+      }
+    }
+  }
+}

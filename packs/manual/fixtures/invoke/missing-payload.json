@@ -1,0 +1,6 @@
+{
+  "name": "no-payload-key",
+  "delivery": {},
+  "config": {},
+  "expect": { "status": "failed", "error": "PAYLOAD_REQUIRED" }
+}

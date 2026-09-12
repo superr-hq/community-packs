@@ -1,0 +1,7 @@
+{
+  "name": "throttled-publish-is-retryable",
+  "input": { "accountId": "acc_th_1", "caption": "Hello" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 429, json: {} }) })" },
+  "expect": { "status": "failed", "error": "RATE_LIMITED" }
+}

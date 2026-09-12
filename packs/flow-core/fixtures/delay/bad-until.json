@@ -1,0 +1,7 @@
+{
+  "name": "unparseable-until",
+  "input": {},
+  "config": { "mode": "until", "until": "not-a-date" },
+  "now": 1000,
+  "expect": { "status": "failed", "error": "INVALID_DELAY_CONFIG" }
+}

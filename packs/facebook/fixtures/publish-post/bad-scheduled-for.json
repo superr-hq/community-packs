@@ -1,0 +1,7 @@
+{
+  "name": "unparseable-schedule-instant-is-invalid",
+  "input": { "accountId": "acc_fb_1", "caption": "later" },
+  "config": { "scheduledFor": "soon" },
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 200, json: {} }) })" },
+  "expect": { "status": "failed", "error": "INVALID_POST_REQUEST" }
+}

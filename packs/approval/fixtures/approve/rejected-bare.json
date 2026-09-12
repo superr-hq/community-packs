@@ -1,0 +1,10 @@
+{
+  "name": "rejected-no-extras",
+  "input": { "summary": "Publish campaign" },
+  "delivery": { "decision": "REJECTED" },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": { "decision": "rejected" }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "substring-containment",
+  "input": { "value": "urgent: server down" },
+  "config": { "operator": "contains", "compareTo": "urgent" },
+  "expect": {
+    "status": "ok",
+    "ports": { "branch": "true", "matched": true }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "callback-delivery-structured",
+  "input": {},
+  "delivery": {
+    "body": { "event": "payment.succeeded", "amount": 100 },
+    "headers": { "content-type": "application/json", "x-signature": "sig123" },
+    "query": { "source": "stripe" },
+    "method": "POST"
+  },
+  "config": {
+    "timeoutMs": 86400000
+  },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "body": { "event": "payment.succeeded", "amount": 100 },
+      "headers": { "content-type": "application/json", "x-signature": "sig123" },
+      "query": { "source": "stripe" },
+      "method": "POST"
+    }
+  }
+}

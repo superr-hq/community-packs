@@ -1,0 +1,20 @@
+{
+  "name": "callback-custom-method-and-query",
+  "input": {},
+  "delivery": {
+    "body": {},
+    "headers": { "accept": "application/json" },
+    "query": { "token": "tok_123", "status": "active" },
+    "method": "GET"
+  },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "body": {},
+      "headers": { "accept": "application/json" },
+      "query": { "token": "tok_123", "status": "active" },
+      "method": "GET"
+    }
+  }
+}

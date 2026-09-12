@@ -1,0 +1,10 @@
+{
+  "name": "approved-with-provenance",
+  "input": { "summary": "Publish campaign" },
+  "delivery": { "decision": "approved", "comment": "Looks good", "decidedBy": "ada", "decidedVia": "messaging" },
+  "config": { "timeoutHours": 24 },
+  "expect": {
+    "status": "ok",
+    "ports": { "decision": "approved", "comment": "Looks good", "decidedBy": "ada", "decidedVia": "messaging" }
+  }
+}

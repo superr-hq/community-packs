@@ -1,0 +1,206 @@
+{
+  "$schema": "https://superr.dev/schemas/pack.v2.json",
+  "id": "approval",
+  "version": "2.0.0",
+  "name": "Approval",
+  "description": "Human-in-the-loop gates: pause a run until someone approves or rejects.",
+  "engine": {
+    "kernel": "^2.0.0"
+  },
+  "nodes": [
+    {
+      "key": "approve",
+      "title": "Approve",
+      "category": "flow",
+      "kind": "hook",
+      "icon": "shield-check",
+      "accent": "#f59e0b",
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "string",
+            "title": "What the approver is deciding on"
+          }
+        },
+        "required": [
+          "summary"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "rejected"
+            ]
+          },
+          "comment": {
+            "type": "string",
+            "title": "Optional note from the approver"
+          },
+          "decidedBy": {
+            "type": "string",
+            "title": "Who decided"
+          },
+          "decidedVia": {
+            "type": "string",
+            "title": "Channel or delivery origin"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "timeoutHours": {
+            "type": "number",
+            "minimum": 1,
+            "title": "Auto-expire after N hours (optional)"
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "messaging"
+            ],
+            "title": "Notification channel"
+          },
+          "recipient": {
+            "type": "string",
+            "title": "Recipient or conversation identifier"
+          },
+          "message": {
+            "type": "string",
+            "title": "Custom message text (defaults to summary)"
+          }
+        }
+      },
+      "policies": {
+        "timeoutMs": 604800000
+      },
+      "errors": [
+        {
+          "code": "INVALID_DECISION",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "Resume decisions must be exactly 'approved' or 'rejected'; redeliver with a valid decision.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              },
+              "received": {}
+            },
+            "required": [
+              "reason"
+            ]
+          }
+        },
+        {
+          "code": "APPROVAL_SEND_RATE_LIMITED",
+          "severity": "warn",
+          "retryable": true,
+          "remediation": "The messaging transport throttled outbound notification; retry policy will back off automatically.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              },
+              "httpStatus": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        {
+          "code": "APPROVAL_SEND_AUTH_REJECTED",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "Messaging transport credentials or permissions were rejected; verify transport configuration.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "code": "APPROVAL_RECIPIENT_UNREACHABLE",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "The specified recipient or conversation identifier could not be reached.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "recipient": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "code": "APPROVAL_SEND_WINDOW_CLOSED",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "The outbound messaging window for this conversation has closed.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "code": "APPROVAL_EXPIRED",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "The approval request exceeded its configured timeoutHours and has expired.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "expiredAt": {
+                "type": "string"
+              },
+              "timeoutHours": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      ],
+      "ui": {
+        "groups": [
+          {
+            "label": "Notification",
+            "fields": [
+              "channel",
+              "recipient",
+              "message"
+            ]
+          },
+          {
+            "label": "Expiry",
+            "fields": [
+              "timeoutHours"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Human-in-the-loop gate: suspends run until approved or rejected."
+    }
+  ]
+}

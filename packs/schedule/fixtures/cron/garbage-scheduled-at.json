@@ -1,0 +1,6 @@
+{
+  "name": "fire-time-unparseable",
+  "delivery": { "scheduledAt": "tuesday-ish" },
+  "config": { "cron": "0 * * * *" },
+  "expect": { "status": "failed", "error": "BAD_SCHEDULED_AT" }
+}

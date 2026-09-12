@@ -1,0 +1,16 @@
+{
+  "name": "unsubscribed-event-type-is-skipped",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_c1\",\"event\":\"comment.received\",\"comment\":{\"id\":\"c_1\",\"postId\":null,\"platformPostId\":\"ig_post_9\",\"platform\":\"instagram\",\"text\":\"Love this!\",\"author\":{\"id\":\"a_1\",\"username\":\"fanuser\",\"name\":\"Fan User\"},\"createdAt\":\"2026-08-26T08:00:00.000Z\",\"isReply\":false,\"parentCommentId\":null},\"post\":{\"id\":null,\"platformPostId\":\"ig_post_9\"},\"account\":{\"id\":\"acc_ig_1\",\"accountId\":\"acc_ig_1\",\"platform\":\"instagram\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-26T08:00:01.000Z\"}"
+  },
+  "config": {
+    "path": "ig",
+    "eventTypes": [
+      "message.received"
+    ]
+  },
+  "expect": {
+    "status": "skipped",
+    "skipCode": "UNSUBSCRIBED_EVENT_TYPE"
+  }
+}

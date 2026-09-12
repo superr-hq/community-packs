@@ -1,0 +1,16 @@
+{
+  "$schema": "https://superr.dev/schemas/pack-bundle.v1.json",
+  "packId": "manual",
+  "packVersion": "2.0.0",
+  "nodes": [
+    {
+      "nodeKey": "invoke",
+      "embeds": {
+        "__superrShared_invoke": "\"use strict\";\nvar __superrShared_invoke = (() => {\n  var __defProp = Object.defineProperty;\n  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;\n  var __getOwnPropNames = Object.getOwnPropertyNames;\n  var __hasOwnProp = Object.prototype.hasOwnProperty;\n  var __export = (target, all) => {\n    for (var name in all)\n      __defProp(target, name, { get: all[name], enumerable: true });\n  };\n  var __copyProps = (to, from, except, desc) => {\n    if (from && typeof from === \"object\" || typeof from === \"function\") {\n      for (let key of __getOwnPropNames(from))\n        if (!__hasOwnProp.call(to, key) && key !== except)\n          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });\n    }\n    return to;\n  };\n  var __toCommonJS = (mod) => __copyProps(__defProp({}, \"__esModule\", { value: true }), mod);\n\n  // runtime/invoke.shape.ts\n  var invoke_shape_exports = {};\n  __export(invoke_shape_exports, {\n    extractPayload: () => extractPayload\n  });\n  function extractPayload(delivery) {\n    if (delivery === null || delivery === void 0 || !(\"payload\" in delivery)) {\n      return { ok: false, reason: \"payload_required\" };\n    }\n    return { ok: true, payload: delivery.payload };\n  }\n  return __toCommonJS(invoke_shape_exports);\n})();\n"
+      },
+      "stepCode": "\"use step\";\nasync function execute(delivery) {\n  const shared = __superrShared_invoke;\n  const extracted = shared.extractPayload(delivery);\n  if (!extracted.ok) {\n    return {\n      ok: false,\n      error: {\n        code: \"PAYLOAD_REQUIRED\",\n        message: \"manual fire provided no payload\",\n        details: {}\n      }\n    };\n  }\n  return { ok: true, ports: { payload: extracted.payload } };\n}\nexport {\n  execute\n};\n",
+      "exports": "execute",
+      "fixtureDigest": "2f705031f64253386710b31f0801f588c05a352ed85a42277d59c2c235867449"
+    }
+  ]
+}

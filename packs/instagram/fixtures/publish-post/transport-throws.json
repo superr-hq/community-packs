@@ -1,0 +1,7 @@
+{
+  "name": "thrown-transport-maps-to-provider-error",
+  "input": { "accountId": "acc_ig_1", "caption": "Hello" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => { throw new Error('socket hang up'); } })" },
+  "expect": { "status": "failed", "error": "PROVIDER_ERROR" }
+}

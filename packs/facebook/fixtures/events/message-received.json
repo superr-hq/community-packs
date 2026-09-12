@@ -1,0 +1,42 @@
+{
+  "name": "messenger-message",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_m1\",\"event\":\"message.received\",\"message\":{\"id\":\"msg_1\",\"conversationId\":\"conv_1\",\"platformMessageId\":\"ig_msg_77\",\"direction\":\"incoming\",\"text\":\"Do you ship internationally?\"},\"conversation\":{\"id\":\"conv_1\",\"platform\":\"facebook\",\"participantName\":\"Jane Doe\"},\"account\":{\"id\":\"acc_fb_1\",\"accountId\":\"acc_fb_1\",\"platform\":\"facebook\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-27T09:12:00.000Z\"}"
+  },
+  "config": { "path": "fb" },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "message.received",
+        "id": "evt_m1",
+        "accountId": "acc_fb_1",
+        "username": "brandco",
+        "text": "Do you ship internationally?",
+        "raw": {
+          "id": "evt_m1",
+          "event": "message.received",
+          "message": {
+            "id": "msg_1",
+            "conversationId": "conv_1",
+            "platformMessageId": "ig_msg_77",
+            "direction": "incoming",
+            "text": "Do you ship internationally?"
+          },
+          "conversation": {
+            "id": "conv_1",
+            "platform": "facebook",
+            "participantName": "Jane Doe"
+          },
+          "account": {
+            "id": "acc_fb_1",
+            "accountId": "acc_fb_1",
+            "platform": "facebook",
+            "username": "brandco"
+          },
+          "timestamp": "2026-08-27T09:12:00.000Z"
+        }
+      }
+    }
+  }
+}

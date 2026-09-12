@@ -1,0 +1,9 @@
+{
+  "name": "ne-against-null",
+  "input": { "value": null },
+  "config": { "operator": "ne", "compareTo": null },
+  "expect": {
+    "status": "ok",
+    "ports": { "branch": "false", "matched": false }
+  }
+}

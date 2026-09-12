@@ -1,0 +1,20 @@
+{
+  "name": "callback-raw-json-body",
+  "input": {},
+  "delivery": {
+    "rawBody": "{\"user_id\":\"u123\",\"action\":\"verified\"}",
+    "headers": { "content-type": "application/json" },
+    "query": {},
+    "method": "POST"
+  },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "body": { "user_id": "u123", "action": "verified" },
+      "headers": { "content-type": "application/json" },
+      "query": {},
+      "method": "POST"
+    }
+  }
+}

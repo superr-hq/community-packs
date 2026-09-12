@@ -1,0 +1,9 @@
+{
+  "name": "object-payload",
+  "delivery": { "payload": { "reason": "manual test", "n": 7 } },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": { "payload": { "reason": "manual test", "n": 7 } }
+  }
+}

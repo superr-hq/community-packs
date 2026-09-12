@@ -1,0 +1,9 @@
+{
+  "name": "objects-compared-deeply",
+  "input": { "value": { "a": 1, "b": [2, 3] } },
+  "config": { "operator": "eq", "compareTo": { "b": [2, 3], "a": 1 } },
+  "expect": {
+    "status": "ok",
+    "ports": { "branch": "true", "matched": true }
+  }
+}

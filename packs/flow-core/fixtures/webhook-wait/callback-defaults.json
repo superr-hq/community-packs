@@ -1,0 +1,15 @@
+{
+  "name": "callback-defaults-empty-delivery",
+  "input": {},
+  "delivery": {},
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "body": {},
+      "headers": {},
+      "query": {},
+      "method": "POST"
+    }
+  }
+}

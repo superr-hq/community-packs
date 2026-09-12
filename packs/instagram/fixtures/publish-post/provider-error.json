@@ -1,0 +1,7 @@
+{
+  "name": "provider-5xx-transient",
+  "input": { "accountId": "acc_ig_1", "caption": "Hello" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 502, json: null }) })" },
+  "expect": { "status": "failed", "error": "PROVIDER_ERROR" }
+}

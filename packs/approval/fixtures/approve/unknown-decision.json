@@ -1,0 +1,7 @@
+{
+  "name": "decision-outside-vocabulary",
+  "input": { "summary": "Publish campaign" },
+  "delivery": { "decision": "maybe" },
+  "config": {},
+  "expect": { "status": "failed", "error": "INVALID_DECISION" }
+}

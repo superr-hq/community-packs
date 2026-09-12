@@ -1,0 +1,10 @@
+{
+  "name": "click-quick-reply",
+  "input": { "summary": "Publish campaign" },
+  "delivery": { "quickReplyPayload": "v1:tok_888:rejected", "comment": "Needs rework", "decidedBy": "carol", "decidedVia": "messaging" },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": { "decision": "rejected", "comment": "Needs rework", "decidedBy": "carol", "decidedVia": "messaging" }
+  }
+}

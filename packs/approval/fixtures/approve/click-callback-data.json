@@ -1,0 +1,10 @@
+{
+  "name": "click-callback-data",
+  "input": { "summary": "Publish campaign" },
+  "delivery": { "callbackData": "v1:tok_777:approved", "decidedBy": "dave", "decidedVia": "messaging" },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": { "decision": "approved", "decidedBy": "dave", "decidedVia": "messaging" }
+  }
+}

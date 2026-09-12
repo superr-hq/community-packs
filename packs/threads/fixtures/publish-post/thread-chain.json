@@ -1,0 +1,16 @@
+{
+  "name": "thread-chain-with-topic-tag",
+  "input": { "accountId": "acc_th_1", "caption": "1/ Launch day" },
+  "config": {
+    "topic_tag": "launch",
+    "threadItems": [
+      { "text": "1/ Launch day" },
+      { "text": "2/ Here is what shipped" }
+    ]
+  },
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 200, json: { _id: 'post_100', status: 'queued' } }) })" },
+  "expect": {
+    "status": "ok",
+    "ports": { "postId": "post_100", "postStatus": "queued" }
+  }
+}

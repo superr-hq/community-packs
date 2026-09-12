@@ -1,0 +1,7 @@
+{
+  "name": "no-account-id",
+  "input": { "caption": "Hello" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 200, json: {} }) })" },
+  "expect": { "status": "failed", "error": "MISSING_ACCOUNT_ID" }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "unknown-mode",
+  "input": {},
+  "config": { "mode": "whenever" },
+  "expect": {
+    "status": "failed",
+    "error": "INVALID_DELAY_CONFIG",
+    "ports": {}
+  }
+}

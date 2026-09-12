@@ -1,0 +1,12 @@
+{
+  "name": "send-auth-rejected",
+  "input": { "summary": "Deploy release v2" },
+  "config": { "channel": "messaging", "recipient": "ops-lead" },
+  "vmGlobals": {
+    "__superrMessagingClient": "({ send: async () => { const err = new Error('unauthorized'); err.status = 401; throw err; } })"
+  },
+  "expect": {
+    "status": "failed",
+    "error": "APPROVAL_SEND_AUTH_REJECTED"
+  }
+}

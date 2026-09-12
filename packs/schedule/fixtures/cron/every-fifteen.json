@@ -1,0 +1,9 @@
+{
+  "name": "valid-cron-iso-fire-time",
+  "delivery": { "scheduledAt": "2026-08-26T09:15:00.000Z" },
+  "config": { "cron": "*/15 * * * *" },
+  "expect": {
+    "status": "ok",
+    "ports": { "scheduledAt": "2026-08-26T09:15:00.000Z" }
+  }
+}

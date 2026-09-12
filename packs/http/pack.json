@@ -1,0 +1,90 @@
+{
+  "$schema": "https://superr.dev/schemas/pack.v2.json",
+  "id": "http",
+  "version": "2.0.0",
+  "name": "HTTP",
+  "description": "Generic HTTP webhook ingress for anything that is not a first-class provider.",
+  "engine": {
+    "kernel": "^2.0.0"
+  },
+  "nodes": [
+    {
+      "key": "webhook-http",
+      "title": "Webhook",
+      "category": "trigger",
+      "kind": "trigger",
+      "icon": "webhook",
+      "accent": "#0ea5e9",
+      "output": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "title": "Delivered JSON payload, verbatim"
+          }
+        },
+        "required": [
+          "body"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^[a-z0-9-/]+$",
+            "title": "Webhook path"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "trigger": {
+        "ingress": {
+          "protocol": "http.api",
+          "routeClaim": {
+            "pathFromConfig": "path",
+            "fallbackForbidden": true
+          },
+          "auth": {
+            "kind": "none"
+          }
+        }
+      },
+      "policies": {
+        "timeoutMs": 10000
+      },
+      "errors": [
+        {
+          "code": "MALFORMED_JSON",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "The delivered body was not valid JSON; fix the sending side and redeliver.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          }
+        }
+      ],
+      "ui": {
+        "groups": [
+          {
+            "label": "Route",
+            "fields": [
+              "path"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Entrypoint that starts a workflow from an HTTP webhook request."
+    }
+  ]
+}

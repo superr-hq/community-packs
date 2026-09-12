@@ -1,0 +1,16 @@
+{
+  "name": "unsubscribed-event-type-is-skipped",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_r1\",\"event\":\"review.new\",\"review\":{\"rating\":2,\"text\":\"meh\"},\"account\":{\"id\":\"acc_fb_1\",\"accountId\":\"acc_fb_1\",\"platform\":\"facebook\",\"username\":\"brandco\"}}"
+  },
+  "config": {
+    "path": "fb",
+    "eventTypes": [
+      "message.received"
+    ]
+  },
+  "expect": {
+    "status": "skipped",
+    "skipCode": "UNSUBSCRIBED_EVENT_TYPE"
+  }
+}

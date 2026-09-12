@@ -1,0 +1,10 @@
+{
+  "name": "click-interactive",
+  "input": { "summary": "Publish campaign" },
+  "delivery": { "interactive": { "button_reply": { "id": "v1:tok_666:approved" } }, "decidedBy": "eve", "decidedVia": "messaging" },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": { "decision": "approved", "decidedBy": "eve", "decidedVia": "messaging" }
+  }
+}

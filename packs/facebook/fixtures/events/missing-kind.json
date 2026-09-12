@@ -1,0 +1,6 @@
+{
+  "name": "missing-event-kind-fails",
+  "delivery": { "rawBody": "{\"id\":\"evt_x1\",\"comment\":{\"text\":\"no kind here\"}}" },
+  "config": { "path": "fb" },
+  "expect": { "status": "failed", "error": "MALFORMED_EVENT" }
+}

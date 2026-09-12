@@ -1,0 +1,6 @@
+{
+  "name": "json-object-without-event-kind-fails",
+  "delivery": { "rawBody": "{\"hello\":true}" },
+  "config": { "path": "ig" },
+  "expect": { "status": "failed", "error": "MALFORMED_EVENT" }
+}

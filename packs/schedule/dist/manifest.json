@@ -1,0 +1,103 @@
+{
+  "$schema": "https://superr.dev/schemas/pack.v2.json",
+  "id": "schedule",
+  "version": "2.0.0",
+  "name": "Schedule",
+  "description": "Start runs on a clock — cron-driven triggers for recurring workflows.",
+  "engine": {
+    "kernel": "^2.0.0"
+  },
+  "nodes": [
+    {
+      "key": "cron",
+      "title": "Schedule",
+      "category": "trigger",
+      "kind": "trigger",
+      "icon": "clock",
+      "accent": "#6366f1",
+      "output": {
+        "type": "object",
+        "properties": {
+          "scheduledAt": {
+            "type": "string",
+            "title": "ISO instant this run was scheduled for"
+          }
+        },
+        "required": [
+          "scheduledAt"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "cron": {
+            "type": "string",
+            "title": "Five-field cron expression"
+          }
+        },
+        "required": [
+          "cron"
+        ]
+      },
+      "trigger": {
+        "ingress": {
+          "protocol": "schedule.clock",
+          "auth": {
+            "kind": "none"
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": "INVALID_CRON",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "Set `cron` to a five-field cron expression like \"*/15 * * * *\".",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              },
+              "field": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          }
+        },
+        {
+          "code": "BAD_SCHEDULED_AT",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "The clock surface delivered a fire time that is not a parseable ISO instant.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "reason"
+            ]
+          }
+        }
+      ],
+      "ui": {
+        "groups": [
+          {
+            "label": "Clock",
+            "fields": [
+              "cron"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Start runs on a clock — cron-driven triggers for recurring workflows."
+    }
+  ]
+}

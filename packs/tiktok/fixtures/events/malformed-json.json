@@ -1,0 +1,6 @@
+{
+  "name": "truncated-json-fails",
+  "delivery": { "rawBody": "{\"event\":" },
+  "config": { "path": "tt" },
+  "expect": { "status": "failed", "error": "MALFORMED_EVENT" }
+}

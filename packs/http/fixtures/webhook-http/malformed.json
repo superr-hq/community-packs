@@ -1,0 +1,6 @@
+{
+  "name": "truncated-json",
+  "delivery": { "rawBody": "{\"type\": " },
+  "config": { "path": "generic" },
+  "expect": { "status": "failed", "error": "MALFORMED_JSON" }
+}

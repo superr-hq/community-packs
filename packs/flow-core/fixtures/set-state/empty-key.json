@@ -1,0 +1,6 @@
+{
+  "name": "empty-config-key",
+  "input": { "value": "x" },
+  "config": { "key": "" },
+  "expect": { "status": "failed", "error": "EMPTY_STATE_KEY" }
+}

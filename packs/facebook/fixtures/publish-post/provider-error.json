@@ -1,0 +1,7 @@
+{
+  "name": "provider-outage-is-retryable",
+  "input": { "accountId": "acc_fb_1", "caption": "Hello" },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 502, json: null }) })" },
+  "expect": { "status": "failed", "error": "PROVIDER_ERROR" }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "instagram-dm",
+  "delivery": { "rawBody": "{\"id\":\"evt_m1\",\"event\":\"message.received\",\"message\":{\"id\":\"msg_1\",\"text\":\"Do you ship to EU?\"},\"account\":{\"id\":\"acc_ig_1\",\"accountId\":\"acc_ig_1\",\"platform\":\"instagram\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-26T09:00:00.000Z\"}" },
+  "config": { "path": "ig" },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "event": {
+        "type": "message.received",
+        "id": "evt_m1",
+        "accountId": "acc_ig_1",
+        "username": "brandco",
+        "text": "Do you ship to EU?",
+        "raw": {"id":"evt_m1","event":"message.received","message":{"id":"msg_1","text":"Do you ship to EU?"},"account":{"id":"acc_ig_1","accountId":"acc_ig_1","platform":"instagram","username":"brandco"},"timestamp":"2026-08-26T09:00:00.000Z"}
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "non-string-decision",
+  "input": { "summary": "Publish campaign" },
+  "delivery": { "decision": true },
+  "config": {},
+  "expect": { "status": "failed", "error": "INVALID_DECISION" }
+}

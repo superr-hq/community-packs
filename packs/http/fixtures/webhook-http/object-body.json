@@ -1,0 +1,9 @@
+{
+  "name": "object-payload",
+  "delivery": { "rawBody": "{\"type\":\"ping\",\"n\":1}" },
+  "config": { "path": "generic" },
+  "expect": {
+    "status": "ok",
+    "ports": { "body": { "type": "ping", "n": 1 } }
+  }
+}

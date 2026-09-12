@@ -1,0 +1,9 @@
+{
+  "name": "truthiness-of-zero",
+  "input": { "value": 0 },
+  "config": { "operator": "truthy" },
+  "expect": {
+    "status": "ok",
+    "ports": { "branch": "false", "matched": false }
+  }
+}

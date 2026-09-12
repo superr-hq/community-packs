@@ -1,0 +1,12 @@
+{
+  "name": "send-window-closed",
+  "input": { "summary": "Deploy release v2" },
+  "config": { "channel": "messaging", "recipient": "lead-user" },
+  "vmGlobals": {
+    "__superrMessagingClient": "({ send: async () => { const err = new Error('messaging window closed'); err.status = 410; err.code = 'WINDOW_CLOSED'; throw err; } })"
+  },
+  "expect": {
+    "status": "failed",
+    "error": "APPROVAL_SEND_WINDOW_CLOSED"
+  }
+}

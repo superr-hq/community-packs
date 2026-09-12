@@ -1,0 +1,6 @@
+{
+  "name": "missing-host-wiring-fails-loudly",
+  "input": { "accountId": "acc_tt_1", "caption": "Hello" },
+  "config": {},
+  "expect": { "status": "failed", "error": "TRANSPORT_UNAVAILABLE" }
+}

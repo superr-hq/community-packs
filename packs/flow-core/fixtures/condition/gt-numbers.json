@@ -1,0 +1,9 @@
+{
+  "name": "numeric-greater-than",
+  "input": { "value": 42 },
+  "config": { "operator": "gt", "compareTo": 41 },
+  "expect": {
+    "status": "ok",
+    "ports": { "branch": "true", "matched": true }
+  }
+}

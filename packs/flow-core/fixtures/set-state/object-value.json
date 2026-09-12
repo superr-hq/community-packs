@@ -1,0 +1,12 @@
+{
+  "name": "store-an-object",
+  "input": { "value": { "campaign": "launch", "count": 3 } },
+  "config": { "key": "campaign/state" },
+  "expect": {
+    "status": "ok",
+    "ports": {
+      "stateKey": "campaign/state",
+      "storedValue": { "campaign": "launch", "count": 3 }
+    }
+  }
+}

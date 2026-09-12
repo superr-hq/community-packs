@@ -1,0 +1,16 @@
+{
+  "name": "unsubscribed-event-type-is-skipped",
+  "delivery": {
+    "rawBody": "{\"id\":\"evt_c1\",\"event\":\"comment.received\",\"comment\":{\"id\":\"c_1\",\"platformPostId\":\"tt_video_7\",\"platform\":\"tiktok\",\"text\":\"This is fire 🔥\"},\"post\":{\"id\":null,\"platformPostId\":\"tt_video_7\"},\"account\":{\"id\":\"acc_tt_1\",\"accountId\":\"acc_tt_1\",\"platform\":\"tiktok\",\"username\":\"brandco\"},\"timestamp\":\"2026-08-28T08:00:01.000Z\"}"
+  },
+  "config": {
+    "path": "tt",
+    "eventTypes": [
+      "post.published"
+    ]
+  },
+  "expect": {
+    "status": "skipped",
+    "skipCode": "UNSUBSCRIBED_EVENT_TYPE"
+  }
+}

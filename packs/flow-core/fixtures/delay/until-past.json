@@ -1,0 +1,10 @@
+{
+  "name": "past-instant-resumes-immediately",
+  "input": {},
+  "config": { "mode": "until", "until": "2001-01-01T00:00:00.000Z" },
+  "now": 1721900000000,
+  "expect": {
+    "status": "ok",
+    "ports": { "resumeAt": "2001-01-01T00:00:00.000Z" }
+  }
+}

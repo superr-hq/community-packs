@@ -1,0 +1,10 @@
+{
+  "name": "approval-expired",
+  "input": { "summary": "Deploy release v2" },
+  "delivery": { "expired": true, "expiredAt": "2026-08-29T12:00:00.000Z" },
+  "config": { "timeoutHours": 1 },
+  "expect": {
+    "status": "failed",
+    "error": "APPROVAL_EXPIRED"
+  }
+}

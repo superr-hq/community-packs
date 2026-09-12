@@ -1,0 +1,10 @@
+{
+  "name": "click-postback",
+  "input": { "summary": "Publish campaign" },
+  "delivery": { "postbackPayload": "v1:tok_999:approved", "decidedBy": "bob", "decidedVia": "messaging" },
+  "config": {},
+  "expect": {
+    "status": "ok",
+    "ports": { "decision": "approved", "decidedBy": "bob", "decidedVia": "messaging" }
+  }
+}

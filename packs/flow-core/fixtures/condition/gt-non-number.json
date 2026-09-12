@@ -1,0 +1,9 @@
+{
+  "name": "non-numeric-operands-deactivate",
+  "input": { "value": "many" },
+  "config": { "operator": "gt", "compareTo": 3 },
+  "expect": {
+    "status": "ok",
+    "ports": { "branch": "false", "matched": false }
+  }
+}

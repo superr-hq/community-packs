@@ -1,0 +1,60 @@
+{
+  "$schema": "https://superr.dev/schemas/pack.v2.json",
+  "id": "manual",
+  "version": "2.0.0",
+  "name": "Manual",
+  "description": "Start runs by hand with an explicit payload — TEST buttons, one-off replays, scripts.",
+  "engine": {
+    "kernel": "^2.0.0"
+  },
+  "nodes": [
+    {
+      "key": "invoke",
+      "title": "Manual Run",
+      "category": "trigger",
+      "kind": "trigger",
+      "icon": "play",
+      "accent": "#10b981",
+      "output": {
+        "type": "object",
+        "properties": {
+          "payload": {
+            "title": "Payload supplied when the run was started"
+          }
+        },
+        "required": [
+          "payload"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {}
+      },
+      "trigger": {
+        "ingress": {
+          "protocol": "manual.invoke",
+          "auth": {
+            "kind": "none"
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": "PAYLOAD_REQUIRED",
+          "severity": "error",
+          "retryable": false,
+          "remediation": "Provide an explicit payload when starting the run; manual fires never invent defaults.",
+          "detailsSchema": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      ],
+      "ui": {
+        "showOutputPanel": true
+      },
+      "description": "Manual triggers start a workflow run on demand with an optional manual payload."
+    }
+  ]
+}

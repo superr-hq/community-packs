@@ -1,0 +1,7 @@
+{
+  "name": "junk-media-urls-are-invalid",
+  "input": { "accountId": "acc_th_1", "mediaUrls": 42 },
+  "config": {},
+  "vmGlobals": { "__superrSocialClient": "({ request: async () => ({ status: 200, json: {} }) })" },
+  "expect": { "status": "failed", "error": "INVALID_POST_REQUEST" }
+}
