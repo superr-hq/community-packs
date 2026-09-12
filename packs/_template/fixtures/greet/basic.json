@@ -1,0 +1,6 @@
+{
+  "name": "basic",
+  "input": { "name": "Ada" },
+  "config": {},
+  "expect": { "status": "ok", "message": "Hello, Ada!" }
+}

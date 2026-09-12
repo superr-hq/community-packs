@@ -1,0 +1,25 @@
+{
+  "$schema": "https://superr.dev/schemas/pack-bundle.v1.json",
+  "packId": "template",
+  "packVersion": "2.0.0",
+  "nodes": [
+    {
+      "nodeKey": "greet",
+      "embeds": {
+        "__superrShared_greet": "\"use strict\";\nvar __superrShared_greet = (() => {\n  var __defProp = Object.defineProperty;\n  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;\n  var __getOwnPropNames = Object.getOwnPropertyNames;\n  var __hasOwnProp = Object.prototype.hasOwnProperty;\n  var __export = (target, all) => {\n    for (var name in all)\n      __defProp(target, name, { get: all[name], enumerable: true });\n  };\n  var __copyProps = (to, from, except, desc) => {\n    if (from && typeof from === \"object\" || typeof from === \"function\") {\n      for (let key of __getOwnPropNames(from))\n        if (!__hasOwnProp.call(to, key) && key !== except)\n          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });\n    }\n    return to;\n  };\n  var __toCommonJS = (mod) => __copyProps(__defProp({}, \"__esModule\", { value: true }), mod);\n\n  // runtime/greet.shape.ts\n  var greet_shape_exports = {};\n  __export(greet_shape_exports, {\n    composeGreeting: () => composeGreeting,\n    isEmptyName: () => isEmptyName\n  });\n  function isEmptyName(name) {\n    return typeof name !== \"string\" || name.trim() === \"\";\n  }\n  function composeGreeting(greeting, name) {\n    const word = greeting.trim() === \"\" ? \"Hello\" : greeting.trim();\n    return `${word}, ${name.trim()}!`;\n  }\n  return __toCommonJS(greet_shape_exports);\n})();\n"
+      },
+      "stepCode": "\"use step\";\nasync function execute(input, config) {\n  const shared = __superrShared_greet;\n  if (shared.isEmptyName(input.name)) {\n    return {\n      ok: false,\n      error: { code: \"EMPTY_NAME\", message: \"name must be a non-empty string\" }\n    };\n  }\n  const greeting = typeof config.greeting === \"string\" ? config.greeting : \"Hello\";\n  return {\n    ok: true,\n    ports: { message: shared.composeGreeting(greeting, String(input.name)) }\n  };\n}\nexport {\n  execute\n};\n",
+      "exports": "execute",
+      "fixtureDigest": "9aa53ab3510a48837278ff2adbd6f8943fa2187e06e534057a4ce4c866bc043b"
+    },
+    {
+      "nodeKey": "hello-trigger",
+      "embeds": {
+        "__superrShared_hello_trigger": "\"use strict\";\nvar __superrShared_hello_trigger = (() => {\n  var __defProp = Object.defineProperty;\n  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;\n  var __getOwnPropNames = Object.getOwnPropertyNames;\n  var __hasOwnProp = Object.prototype.hasOwnProperty;\n  var __export = (target, all) => {\n    for (var name in all)\n      __defProp(target, name, { get: all[name], enumerable: true });\n  };\n  var __copyProps = (to, from, except, desc) => {\n    if (from && typeof from === \"object\" || typeof from === \"function\") {\n      for (let key of __getOwnPropNames(from))\n        if (!__hasOwnProp.call(to, key) && key !== except)\n          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });\n    }\n    return to;\n  };\n  var __toCommonJS = (mod) => __copyProps(__defProp({}, \"__esModule\", { value: true }), mod);\n\n  // runtime/hello-trigger.shape.ts\n  var hello_trigger_shape_exports = {};\n  __export(hello_trigger_shape_exports, {\n    pickName: () => pickName,\n    shapeGreeting: () => shapeGreeting\n  });\n  function pickName(delivery, fallback) {\n    const name = delivery?.name;\n    return typeof name === \"string\" && name.trim() !== \"\" ? name : fallback;\n  }\n  function shapeGreeting(name) {\n    return `Hello, ${name}!`;\n  }\n  return __toCommonJS(hello_trigger_shape_exports);\n})();\n"
+      },
+      "stepCode": "\"use step\";\nasync function execute(delivery, config) {\n  const shared = __superrShared_hello_trigger;\n  const fallback = typeof config.name === \"string\" ? config.name : \"world\";\n  const name = shared.pickName(\n    delivery,\n    fallback\n  );\n  return { ok: true, ports: { message: shared.shapeGreeting(name) } };\n}\nexport {\n  execute\n};\n",
+      "exports": "execute",
+      "fixtureDigest": "a89a97f78d046ae6feafb7f5bc4c4cb5441e37a9c91ae82512342d02cb78a5a1"
+    }
+  ]
+}
