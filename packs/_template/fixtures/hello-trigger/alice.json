@@ -1,0 +1,6 @@
+{
+  "name": "alice",
+  "delivery": { "name": "Alice" },
+  "config": { "path": "hello" },
+  "expect": { "status": "ok", "message": "Hello, Alice!" }
+}

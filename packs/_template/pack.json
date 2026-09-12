@@ -1,0 +1,127 @@
+{
+  "$schema": "https://superr.dev/schemas/pack.v2.json",
+  "id": "template",
+  "version": "2.0.0",
+  "name": "Template",
+  "description": "Hello-world scaffold demonstrating the full pack contract (§4.2): manifest, pure shape module, op module, deploy wiring, fixtures.",
+  "engine": {
+    "kernel": "^2.0.0"
+  },
+  "nodes": [
+    {
+      "key": "hello-trigger",
+      "title": "Hello Trigger",
+      "category": "trigger",
+      "kind": "trigger",
+      "icon": "webhook",
+      "accent": "#3b82f6",
+      "output": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^[a-z0-9-/]+$",
+            "title": "Webhook path"
+          },
+          "name": {
+            "type": "string",
+            "default": "world",
+            "title": "Fallback name"
+          }
+        },
+        "required": [
+          "path"
+        ]
+      },
+      "trigger": {
+        "ingress": {
+          "protocol": "http.api",
+          "routeClaim": {
+            "pathFromConfig": "path",
+            "fallbackForbidden": true
+          },
+          "auth": {
+            "kind": "none"
+          }
+        }
+      },
+      "errors": [],
+      "ui": {
+        "groups": [
+          {
+            "label": "Webhook",
+            "fields": [
+              "path",
+              "name"
+            ]
+          }
+        ],
+        "showOutputPanel": true
+      },
+      "description": "Hello-world trigger demonstrating pack ingress and route binding."
+    },
+    {
+      "key": "greet",
+      "title": "Greet",
+      "category": "action",
+      "kind": "step",
+      "icon": "send",
+      "accent": "#10b981",
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "config": {
+        "type": "object",
+        "properties": {
+          "greeting": {
+            "type": "string",
+            "default": "Hello",
+            "title": "Greeting word"
+          }
+        }
+      },
+      "policies": {
+        "timeoutMs": 5000
+      },
+      "errors": [
+        {
+          "code": "EMPTY_NAME",
+          "severity": "warn",
+          "retryable": false,
+          "remediation": "Provide a non-empty name."
+        }
+      ],
+      "description": "Hello-world greet action step."
+    }
+  ]
+}

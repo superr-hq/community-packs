@@ -1,0 +1,6 @@
+{
+  "name": "empty-name",
+  "input": { "name": "   " },
+  "config": {},
+  "expect": { "error": "EMPTY_NAME" }
+}

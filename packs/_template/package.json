@@ -1,0 +1,16 @@
+{
+  "name": "@superr/pack-template",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@superr-hq/sdk": "workspace:*"
+  }
+}

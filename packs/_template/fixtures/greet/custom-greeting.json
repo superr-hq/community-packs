@@ -1,0 +1,6 @@
+{
+  "name": "custom-greeting",
+  "input": { "name": "Ada" },
+  "config": { "greeting": "Hi" },
+  "expect": { "status": "ok", "message": "Hi, Ada!" }
+}

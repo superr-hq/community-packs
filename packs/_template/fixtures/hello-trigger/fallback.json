@@ -1,0 +1,6 @@
+{
+  "name": "fallback-name",
+  "delivery": {},
+  "config": { "path": "hello", "name": "world" },
+  "expect": { "status": "ok", "message": "Hello, world!" }
+}
